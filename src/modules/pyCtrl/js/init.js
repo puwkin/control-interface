@@ -106,4 +106,4 @@ $.contextMenu({
         "sep1": "---------",
         "output/live": {name: "Live Output"}
     }
-});
+}); //END $.contextMenu

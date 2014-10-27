@@ -1,4 +1,9 @@
 
+#scriptResponse{
+    display: block;
+    height: 22px;
+    margin-bottom: 5px;
+}
 
 .script-status{
     width: 20px;
@@ -6,3 +11,16 @@
     border-radius: 50%;
     display: inline-block;
 }
+
+.script-name{
+    font-size: 18px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+}
+.script-uptime{
+    vertical-align: super;
+    margin-left: 15px;
+    float: right;
+}
+
+
