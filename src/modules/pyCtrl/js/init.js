@@ -17,9 +17,6 @@ var Script = {
             _.each(scripts.all, function(script){
                 $('#scriptsContainer').append(Script._template(script));
                 var $scriptBox = $("#script-"+script.name);
-                //$scriptBox.find('button').on('click',function(e){
-                //    Script.cmd(e, script.name);
-                //});
                 $("#script-"+script.name+"-dialog").dialog({
                     autoOpen: false,
                     close: function( event, ui ){
@@ -77,6 +74,9 @@ var Script = {
         }else{
             Script.sendCommand(cmd_, function (response) {
                 $("#scriptResponse").html(response.output);
+                setTimeout(function(){
+                    $("#scriptResponse").html('');
+                }, 4000);
             });
         }
     }
