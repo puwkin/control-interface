@@ -6,18 +6,28 @@ $(function() {
 
 var Module = {
     _template: _.template(
-        '<div id="{{id}}" class="module">' +
-            '<div class="header">' +
-                '<span class="title">{{name}}</span>' +
+        '<div id="{{id}}" class="moduleBox">' +
+            '<div class="moduleBox-header">' +
+                '<span class="moduleBox-title">{{config.name}}</span>' +
             '</div>' +
-            '<div class="content"></div>' +
+            '<div class="moduleBox-content"></div>' +
         '</div>'
     ),
     intervals: {},
     init: function(){
         _.each(moduleList, function(module){
-            var interval = parseInt(module.interval * 1000, 10);
+            var interval = parseInt(module.config.interval * 1000, 10);
             $('#modulesContainer').append(Module._template(module));
+            if(typeof module.config.width === 'undefined' || module.config.width <= 0){
+                module.config.width = 200;
+            }
+            if(typeof module.config.height === 'undefined' || module.config.height <= 0){
+                module.config.height = 200;
+            }
+            $("#"+module.id).css({
+                width: module.config.width,
+                height: module.config.height
+            });
             Module.loadModule(module);
             if(interval > 0) {
                 Module.intervals[module.id] = window.setInterval(function () {
@@ -27,6 +37,6 @@ var Module = {
         });
     },
     loadModule: function(module){
-        $("#"+module.id).find('.content').load(module.index);
+        $("#"+module.id).find('.moduleBox-content').load(module.index);
     }
 }; //END var Module

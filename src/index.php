@@ -12,7 +12,10 @@ function get_module_list(){
             $config = parse_ini_file($base_dir.'config.ini');
             $id = str2cml($config['name']);
             $index = $base_dir.$config['index'];
-            $module_dict[$id] = ['id' => $id, 'name' => $config['name'], 'index' => $index, 'interval' => $config['interval']];
+            $module_dict[$id] = ['id' => $id,
+                                 'index' => $index,
+                                 'config' => $config
+            ];
         }
     }
     return json_encode($module_dict);
@@ -25,6 +28,8 @@ function get_module_list(){
 <head lang="en">
     <meta charset="UTF-8">
     <title>Main Control Interface</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href="./assets/css/styles.css" rel="stylesheet" type="text/css" />
     <script>
         var moduleList = <?php echo get_module_list(); ?>;
     </script>
