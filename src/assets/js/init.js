@@ -24,9 +24,12 @@ var Module = {
             if(typeof module.config.height === 'undefined' || module.config.height <= 0){
                 module.config.height = 200;
             }
-            $("#"+module.id).css({
-                width: module.config.width,
-                height: module.config.height
+            var $moduleBox = $("#"+module.id);
+            $moduleBox.css({
+                width: module.config.width+"px"
+            });
+            $moduleBox.find('.moduleBox-content').css({
+                'max-height': module.config.height+"px"
             });
             Module.loadModule(module);
             if(interval > 0) {

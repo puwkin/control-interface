@@ -28,8 +28,9 @@ function get_module_list(){
 <head lang="en">
     <meta charset="UTF-8">
     <title>Main Control Interface</title>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic' rel='stylesheet' type='text/css'>
-    <link href="./assets/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic" rel='stylesheet' type='text/css'>
+    <link href="https://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" rel='stylesheet' type='text/css'>
+    <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
     <script>
         var moduleList = <?php echo get_module_list(); ?>;
     </script>
@@ -42,6 +43,7 @@ function get_module_list(){
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
 <script src="./assets/js/init.js"></script>
 </body>

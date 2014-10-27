@@ -27,5 +27,5 @@ body{
 
 .moduleBox-content{
     padding: 15px;
-
+    overflow: auto;
 }
