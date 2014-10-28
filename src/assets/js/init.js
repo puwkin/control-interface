@@ -26,7 +26,7 @@ var Module = {
             }
             var $moduleBox = $("#"+module.id);
             $moduleBox.css({
-                width: module.config.width+"px"
+                'min-width': module.config.width+"px"
             });
             $moduleBox.find('.moduleBox-content').css({
                 'max-height': module.config.height+"px"
