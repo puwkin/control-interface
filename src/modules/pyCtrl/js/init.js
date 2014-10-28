@@ -11,9 +11,11 @@ var Script = {
         '   <span class="script-uptime">{{uptime}}</span>' +
         '</div>'
     ),
+    refreshInterval: null,
     dialogIntervals: {},
     init: function(){
         Script.createList();
+
     },
     sendCommand: function(cmd_, cb){
         return $.getJSON(sendCmdUrl + "?cmd=/api" + cmd_, function (response) {
@@ -27,7 +29,6 @@ var Script = {
         Script.sendCommand('/script/list',function(scripts){
             _.each(scripts.all, function(script){
                 $('#scriptsContainer').append(Script._template(script));
-                var $scriptBox = $("#script-"+script.name);
                 $("#script-"+script.name+"-dialog").dialog({
                     autoOpen: false,
                     close: function( event, ui ){
@@ -36,14 +37,15 @@ var Script = {
                     }
                 });
             });
-        }).done(function() {
-            var refreshInt = setInterval(Script.refreshList, 1000);
+        }).done( function(){
+            if(Script.refreshInterval == null){
+                Script.refreshInterval = setInterval(Script.refreshList, 1000);
+            }
         });
     },
     updateList: function(){
         Script.cmd('/script/list/update','All');
         Script.createList();
-
     },
     refreshList: function(){
         Script.sendCommand('/script/list',function(scripts){
@@ -96,6 +98,9 @@ Script.init();
 
 $("#updateList").on('click', function(){
     Script.updateList();
+});
+$("#scriptRestart").on('click', function(){
+    Script.cmd('/controller/restart', 'ScriptController');
 });
 
 $.contextMenu({
