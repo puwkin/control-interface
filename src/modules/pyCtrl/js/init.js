@@ -122,8 +122,12 @@ $.contextMenu({
                     var $target = $(e.currentTarget);
                     var key = event.which || event.keyCode;
                     if(key == 13) {
-                        var cmd = '/script/'+scriptName+'/setting/interval/'+$target.val();
-                        Script.cmd(cmd, scriptName);
+                        var value = parseInt($target.val(), 10);
+                        if(!isNaN(value)){
+                            var cmd = '/script/'+scriptName+'/setting/interval/'+value;
+                            Script.cmd(cmd, scriptName);
+                            e.data.$trigger.data('interval', value);
+                        }
                         e.data.$trigger.contextMenu("hide");
                     }
                 }
