@@ -49,12 +49,10 @@ var Script = {
         Script.sendCommand('/script/list',function(scripts){
             _.each(scripts.all, function(script) {
                 var color = 'gray';
-                if (script.enabled) {
-                    if (script.running) {
-                        color = 'red';
-                    } else if (!script.running) {
-                        color = 'green';
-                    }
+                if(script.running){
+                    color = 'red';
+                }else if(!script.running && script.enabled){
+                    color = 'green';
                 }
                 var $scriptBox = $("#script-"+script.name);
                 $scriptBox.find('.script-status').css({
