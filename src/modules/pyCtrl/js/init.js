@@ -13,6 +13,17 @@ var Script = {
     ),
     dialogIntervals: {},
     init: function(){
+        Script.createList();
+    },
+    sendCommand: function(cmd_, cb){
+        return $.getJSON(sendCmdUrl + "?cmd=/api" + cmd_, function (response) {
+            cb(response);
+        });
+    },
+    createList: function(){
+        //first make sure the container is empty
+        $('#scriptsContainer').html('');
+        //Generate the new list
         Script.sendCommand('/script/list',function(scripts){
             _.each(scripts.all, function(script){
                 $('#scriptsContainer').append(Script._template(script));
@@ -29,10 +40,10 @@ var Script = {
             var refreshInt = setInterval(Script.refreshList, 1000);
         });
     },
-    sendCommand: function(cmd_, cb){
-        return $.getJSON(sendCmdUrl + "?cmd=" + cmd_, function (response) {
-            cb(response);
-        });
+    updateList: function(){
+        Script.cmd('/script/list/update','All');
+        Script.createList();
+
     },
     refreshList: function(){
         Script.sendCommand('/script/list',function(scripts){
@@ -73,7 +84,7 @@ var Script = {
             }
         }else{
             Script.sendCommand(cmd_, function (response) {
-                $("#scriptResponse").html(response.output);
+                $("#scriptResponse").html(name+': '+response.output);
                 setTimeout(function(){
                     $("#scriptResponse").html('');
                 }, 4000);
@@ -85,6 +96,9 @@ var Script = {
 
 Script.init();
 
+$("#updateList").on('click', function(){
+    Script.updateList();
+});
 
 $.contextMenu({
     selector: '.context-menu-pyCtrl-scripts',
