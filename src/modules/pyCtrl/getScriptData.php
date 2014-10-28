@@ -1,5 +1,5 @@
 <?php
-$host = "http://192.168.1.242";
+$host = "http://localhost";
 $port = 5001;
 
 $cmd = "/script/list";

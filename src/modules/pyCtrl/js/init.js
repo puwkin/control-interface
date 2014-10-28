@@ -4,7 +4,7 @@ var sendCmdUrl = "./modules/pyCtrl/getScriptData.php";
 
 var Script = {
     _template: _.template(
-        '<div id="script-{{name}}" class="context-menu-pyCtrl-scripts">' +
+        '<div id="script-{{name}}" class="context-menu-pyCtrl-scripts" data-interval="{{trigger_setting.interval}}">' +
         '   <div id="script-{{name}}-dialog" class="dialog" title="{{name}}"></div>' +
         '   <span class="script-status"></span>' +
         '   <span class="script-name">{{name}}</span>' +
@@ -88,15 +88,21 @@ Script.init();
 
 $.contextMenu({
     selector: '.context-menu-pyCtrl-scripts',
-    trigger: 'left',
+    trigger: 'right',
     build: function($trigger, e){
-        var $scriptName = $trigger.find(".script-name").html();
+        var scriptName = $trigger.find(".script-name").html();
         return {
             callback: function (key, options) {
-                var cmd = '/script/'+$scriptName+'/'+key;
-                Script.cmd(cmd, $scriptName);
+                var cmd = '/script/'+scriptName+'/'+key;
+                Script.cmd(cmd, scriptName);
             }
         };
+    },
+    events: {
+        show: function (e) {
+            var currInterval = e.$trigger.data('interval');
+            $.contextMenu.setInputValues(e, {interval: currInterval});
+        }
     },
     items: {
         "enable": {name: "Enable"},
@@ -104,6 +110,24 @@ $.contextMenu({
         "run": {name: "Run"},
         "stop": {name: "Stop"},
         "sep1": "---------",
-        "output/live": {name: "Live Output"}
+        "output/live": {name: "Live Output"},
+        "sep2": "---------",
+        "interval": {
+            name: "Interval",
+            type: 'text',
+            value: 5,
+            events: {
+                keyup: function(e) {
+                    var scriptName = e.data.$trigger.find(".script-name").html();
+                    var $target = $(e.currentTarget);
+                    var key = event.which || event.keyCode;
+                    if(key == 13) {
+                        var cmd = '/script/'+scriptName+'/setting/interval/'+$target.val();
+                        Script.cmd(cmd, scriptName);
+                        e.data.$trigger.contextMenu("hide");
+                    }
+                }
+            }
+        }
     }
 }); //END $.contextMenu
