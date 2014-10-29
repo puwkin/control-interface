@@ -1,7 +1,6 @@
 <?php
 include('./functions.php');
 
-
 function get_module_list(){
     $module_dir    = './modules';
     $modules = scandir($module_dir);
@@ -21,7 +20,6 @@ function get_module_list(){
     return json_encode($module_dict);
 } //END get_module_list()
 
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,6 +30,13 @@ function get_module_list(){
     <link href="https://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" rel='stylesheet' type='text/css'>
     <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
     <link href="assets/css/jquery.contextMenu.css" rel="stylesheet" type="text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="assets/js/jquery.contextMenu.js"></script>
+    <script src="./assets/js/init.js"></script>
+
     <script>
         var moduleList = <?php echo get_module_list(); ?>;
     </script>
@@ -39,14 +44,8 @@ function get_module_list(){
 </head>
 <body>
 
-
 <div id="modulesContainer">
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
-<script src="assets/js/jquery.contextMenu.js"></script>
-<script src="./assets/js/init.js"></script>
 </body>
 </html>
