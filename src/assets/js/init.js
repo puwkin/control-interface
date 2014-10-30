@@ -8,7 +8,9 @@ var Module = {
     _template: _.template(
         '<div id="{{id}}" class="moduleBox">' +
             '<div class="moduleBox-header">' +
+                '<span class="moduleBox-title-left"></span>' +
                 '<span class="moduleBox-title">{{config.name}}</span>' +
+                '<span class="moduleBox-title-right"></span>' +
             '</div>' +
             '<div class="moduleBox-content"></div>' +
         '</div>'
